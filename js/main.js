@@ -46,10 +46,15 @@ function CountDownToMario(endTime, divId) {
   function showRemaining(){
     let now = new Date ();
     let distance = end - now;
+    const div    = document.getElementById(divId);
+    const target = new Date(div.dataset.release);
+   
 
 
-    if(distance<=0){
-         
+    if(0 <=0){
+        div.textContent  = "LAUNCHED!";
+        document.getElementById('coins-spill').play();
+        if (sound) sound.play();
         } else {
 
          let days = distance /_day;
@@ -74,13 +79,11 @@ function CountDownToMario(endTime, divId) {
          const minutePad = String(minutes).padStart(2,'0');
          const  secondPad = String(seconds).padStart(2,'0'); 
 
-         const div    = document.getElementById(divId);
-       const target = new Date(div.dataset.release);
+        
         div.textContent  = dayPad+ "days, " + hourPad + "hours, " + minutePad+ "minutes, " + secondPad + "seconds";
         }
     }
-        showRemaining();
-
+        
         setInterval(showRemaining,1000);
 
     }
@@ -132,91 +135,3 @@ function CountDownToMario(endTime, divId) {
    🎉  BONUS  — optional extras
    ------------------------------------------------------
    • Add a confetti explosion (see confetti.js) - Check js in */
- *  @param {string|Date} endTime – Launch deadline.
- *  @param {string}       divId  – id of the DOM node for text.
- */
-
-
-function CountDownToMario(endTime, divId) {
-  /* STEP 1: Convert deadline into a Date object. */
-  const end = new Date(endTime);
-
-
-  /* 👉 Time constants (leave these as-is): */
-  const _second = 1000;
-  const _minute = _second * 60;
-  const _hour   = _minute * 60;
-  const _day    = _hour * 24;
-  const div    = document.getElementById(divId);
-  function showRemaining(){
-    const now = new Date ();
-    const distance = end - now;
-
-
-    if(distance<=0){
-         clearInterval(IntervalId);
-         div.textContent = "the switch 2 is out!" ;
-         document.body.classList.add('launched');
-        } else {
-         const days = Math.floor(distance /_day);
-
-
-         const hours = Math.floor((distance %_day)/hour);
-         const minutes = Math.floor((distance %_hour)/_minute);
-         const seconds = Math.floor((distance % minute)/_second);
-
-
-        div.textContent  = 'Days: ${days}s Hours ${hours}s Minutes ${minutes}m ${seconds}s';
-        }
-    }
-        showRemaining();
-        const  = setInterval(showRemaining,1000);
-    }
-  /* STEP 2: Declare any variables you’ll need here
-            (e.g. interval id). */
-
-
-
-
-  /* STEP 3: Write an inner `showRemaining()` function:
-       • get current time (`new Date()`)
-       • figure out the distance to launch
-       • if distance <= 0 ⇒ clear interval & show hype msg
-       • else break distance into days / hrs / mins / secs
-       • pad units to two digits (see hints below)
-       • update `document.getElementById(divId).textContent`
-  */
-
-
-  /* STEP 4: Call `showRemaining()` once so the timer
-            appears immediately. */
-
-
-  /* STEP 5: Repeat `showRemaining()` every second
-            with `setInterval`. */
-}
-
-
-/* ======================================================
-   📌  HINTS  — uncomment / tweak as you implement
-   ------------------------------------------------------
-   • Two-digit padding helper
-       // const pad = n => String(n).padStart(2, '0');
-
-
-   • Read release date from HTML
-       // const div    = document.getElementById(divId);
-       // const target = new Date(div.dataset.release);
-
-
-   • Celebration styles
-       // document.body.classList.add('launched');
-
-
-   • Play sound once
-       // document.getElementById('coinSound').play();
-====================================================== */
-/* ======================================================
-   🎉  BONUS  — optional extras
-   ------------------------------------------------------
-   • Add a confetti explosion (see confetti.js) - Check js in
